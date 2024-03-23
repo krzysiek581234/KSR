@@ -33,17 +33,16 @@ HRESULT fabryka2::QueryInterface(REFIID InterfaceIdentifier, void ** InterfacePo
 
 ULONG fabryka2::AddRef()
 {
-	/*
-	Tutaj zaimplementuj dodawanie referencji na obiekt.
-	 */
+	InterlockedIncrement(&m_ref);
+	return m_ref;
 }
 
 ULONG fabryka2::Release()
 {
-	/*
-	Tutaj zaimplementuj usuwania referencji na obiekt.
-	Jeżeli nie istnieje żadna referencja obiekt powinien zostać usunięty.
-	 */
+	ULONG rv = InterlockedDecrement(&m_ref);
+	if (rv == 0) delete this;
+	return rv;
+
 }
 
 HRESULT fabryka2::LockServer(BOOL blocked)

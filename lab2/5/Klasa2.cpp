@@ -8,9 +8,6 @@ extern volatile ULONG numberOfUsedInstances;
 Klasa2::Klasa2()
 {
 	InterlockedIncrement(&numberOfUsedInstances);
-	/*
-	Tutaj zainicjuj wartością zerową licznik referencji
-	*/
 	m_ref = 0;
 
 
@@ -38,19 +35,12 @@ HRESULT Klasa2::QueryInterface(REFIID interfaceIdentifier, void ** interfacePoin
 
 ULONG Klasa2::AddRef()
 {
-	/*
-	Tutaj zaimplementuj dodawanie referencji na obiekt.
-	 */
 	InterlockedIncrement(&m_ref);
 	return m_ref;
 }
 
 ULONG Klasa2::Release()
 {
-	/*
-	Tutaj zaimplementuj usuwanie referencji na obiekt.
-	Jeżeli nie istnieje żadna referencja obiekt powinien zostać usunięty.
-	 */
 	ULONG rv = InterlockedDecrement(&m_ref);
 	if (rv == 0) delete this;
 	return rv;
