@@ -1,0 +1,7 @@
+LIBRARY <proxyStub2.dll>.dll
+
+EXPORTS
+DllCanUnloadNow
+DllGetClassObject
+DllRegisterServer
+DllUnregisterServer
